@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { catchError, map, tap } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 
 import { ProductCategory } from './product-category';
@@ -10,6 +10,12 @@ import { ProductCategory } from './product-category';
 })
 export class ProductCategoryService {
   private productCategoriesUrl = 'api/productCategories';
+
+  productCategories$ = this.http.get<ProductCategory[]>(this.productCategoriesUrl)
+      .pipe(
+        tap(data => console.log('categories', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
 
   constructor(private http: HttpClient) { }
 

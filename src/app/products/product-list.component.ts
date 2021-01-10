@@ -47,7 +47,7 @@ export class ProductListComponent {
         this.selectedCategoryId ? product.categoryId === this.selectedCategoryId : true
       ))
     );
-
+  
   constructor(private productService: ProductService, private productCategoryService: ProductCategoryService) { }
 
   onAdd(): void {
